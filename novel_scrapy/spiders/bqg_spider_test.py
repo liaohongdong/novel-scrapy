@@ -3,7 +3,7 @@ from novel_scrapy.items import NovelScrapyItem
 
 
 class bqgSpider(scrapy.Spider):  # 需要继承scrapy.Spider类
-    name = 'bqg2'  # 定义蜘蛛名
+    name = 'bqgTest'  # 定义蜘蛛名
     allowed_domains = ["lab.scrapyd.cn"]
     start_urls = ['http://lab.scrapyd.cn/']
 

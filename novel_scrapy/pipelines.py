@@ -10,17 +10,16 @@ import pymysql
 import pymysql.cursors
 import codecs
 from twisted.enterprise import adbapi
+from novel_scrapy.items import NovelMenuItem
 
 
 class NovelScrapyPipeline(object):
 
     def __init__(self, dbpool):
-        print('=======2')
         self.dbpool = dbpool
 
     @classmethod
     def from_settings(cls, settings):
-        print('=======1')
         dbargs = dict(
             host=settings['MYSQL_HOST'],
             db=settings['MYSQL_DBNAME'],
@@ -35,19 +34,20 @@ class NovelScrapyPipeline(object):
         return cls(dbpool)
 
     def process_item(self, item, spider):
-        print('=======3')
-        d = self.dbpool.runInteraction(self._conditional_insert, item, spider)  # 调用插入的方法
+        if isinstance(item, NovelMenuItem):
+            d = self.dbpool.runInteraction(self.bqg_menu, item, spider)  # 调用插入的方法
+        else:
+            log.msg("-------------------出错了  item不匹配-------------------")
         log.msg("-------------------连接好了-------------------")
         d.addErrback(self._handle_error, item, spider)  # 调用异常处理方法
         d.addBoth(lambda _: item)
         return d
 
-    def _conditional_insert(self, conn, item, spider):
-        print('=======4')
-        log.msg("-------------------打印-------------------")
-        conn.execute("insert into `book` (`name`) values(%s)", (item['name']))
-        log.msg("-------------------一轮循环完毕-------------------")
+    def bqg_menu(self, conn, item, spider):
+        log.msg("````bqg_menu start```")
+        conn.execute('insert ignore into `scrapy_menu` (`book_type`) values (%s)', (item['book_type']))
+        log.msg("````bqg_menu end```")
 
     def _handle_error(self, failue, item, spider):
-        print('=======5')
+        print('-------------------报错了-------------------')
         print(failue)

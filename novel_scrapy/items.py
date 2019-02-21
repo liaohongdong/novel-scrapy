@@ -11,3 +11,8 @@ import scrapy
 class NovelScrapyItem(scrapy.Item):
     # define the fields for your item here like:
     name = scrapy.Field()
+
+
+class NovelMenuItem(scrapy.Item):
+    book_type = scrapy.Field()
+    book_id = scrapy.Field()
