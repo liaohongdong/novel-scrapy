@@ -26,10 +26,10 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+# DOWNLOAD_DELAY = 60/40.0 ####################
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
-# CONCURRENT_REQUESTS_PER_IP = 16
+# CONCURRENT_REQUESTS_PER_IP = 40 ####################
 
 # Disable cookies (enabled by default)
 # COOKIES_ENABLED = True
@@ -51,9 +51,11 @@ DOWNLOAD_DELAY = 3
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'novel_scrapy.middlewares.NovelScrapyDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+   # 'novel_scrapy.middlewares.NovelScrapyDownloaderMiddleware': 543,
+   # 'novel_scrapy.middlewares.customProxy.RandomProxy': 300, # 数字越小的优先处理
+   'novel_scrapy.middlewares.customUserAgent.RandomUserAgent': 543,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html

@@ -19,7 +19,7 @@ class bqgSpider(scrapy.Spider):  # 需要继承scrapy.Spider类
             fileName = '%s-语录.txt' % autor  # 定义文件名,如：木心-语录.txt
 
             item['name'] = autor
-            yield item
+            # yield item
             # with open(fileName, "a+") as f:  # 不同人的名言保存在不同的txt文档，“a+”以追加的形式
             #     f.write(text)
             #     f.write('\n')  # ‘\n’ 表示换行
@@ -30,7 +30,7 @@ class bqgSpider(scrapy.Spider):  # 需要继承scrapy.Spider类
         next_page = response.css('li.next a::attr(href)').extract_first()  # css选择器提取下一页链接
 
         if next_page is not None:  # 判断是否存在下一页
-            next_page = response.urljoin(next_page)
+            # next_page = response.urljoin(next_page)
             # 接下来就是爬取下一页或是内容页的秘诀所在：
             # scrapy给我们提供了这么一个方法：scrapy.Request()
             # 这个方法还有许多参数，后面我们慢慢说，这里我们只使用了两个参数

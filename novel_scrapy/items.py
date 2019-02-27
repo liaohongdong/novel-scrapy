@@ -16,3 +16,8 @@ class NovelScrapyItem(scrapy.Item):
 class NovelMenuItem(scrapy.Item):
     book_type = scrapy.Field()
     book_id = scrapy.Field()
+
+
+class IpItem(scrapy.Item):
+    ip = scrapy.Field()
+    port = scrapy.Field()
