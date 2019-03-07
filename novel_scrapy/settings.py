@@ -52,9 +52,9 @@ ROBOTSTXT_OBEY = True
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   # 'novel_scrapy.middlewares.NovelScrapyDownloaderMiddleware': 543,
-   # 'novel_scrapy.middlewares.customProxy.RandomProxy': 300, # 数字越小的优先处理
-   'novel_scrapy.middlewares.customUserAgent.RandomUserAgent': 543,
+    # 'novel_scrapy.middlewares.NovelScrapyDownloaderMiddleware': 543,
+    'novel_scrapy.middlewares.customProxy.RandomProxy': 300,  # 数字越小的优先处理
+    'novel_scrapy.middlewares.customUserAgent.RandomUserAgent': 543,
 }
 
 # Enable or disable extensions
@@ -66,7 +66,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'novel_scrapy.pipelines.NovelScrapyPipeline': 300,
+    # 'novel_scrapy.pipelines.novel_scrapy_pipelines.NovelScrapyPipeline': 300,
+    'novel_scrapy.pipelines.qd_book_pipelines.QdBookPipeline': 100,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -16,7 +16,7 @@ class IpSpider(scrapy.Spider):
         str2 = ']\n'
         for index in range(len(items)):
             str0 += '    \'' + items[index].css('span li::text').get() + ':' + items[index].css(
-                'span:nth-child(2) li::text').get() + '\'\n'
+                'span:nth-child(2) li::text').get() + '\',\n'
         str = str0 + str1 + str2
         print(str)
         with open(os.getcwd() + '\\novel_scrapy\\middlewares\\resource.py', 'r', encoding='utf-8') as f:

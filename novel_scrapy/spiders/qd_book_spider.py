@@ -1,12 +1,7 @@
 import scrapy
-import io
-import sys
-import os
 import re
-from fontTools.ttLib import TTFont
 from novel_scrapy.common.font_num import FontToNum
-from io import BytesIO
-from pprint import pprint
+from novel_scrapy.items import NovelBookItem
 
 
 class QdSpider(scrapy.Spider):
@@ -33,11 +28,19 @@ class QdSpider(scrapy.Spider):
         re_txt = response.text
         reg = re.match(self.lines, re_txt, re.M | re.S)
         for item in range(len(wrap)):
+            nb_item = NovelBookItem()
             i = wrap[item]
             style_font = i.css('.update span style::text').extract()  # 反爬字体图标
             ttf_file = re.match(r'.*url\(\'(.*?)\'\).*?url\(\'(.*?)\'\).*?url\(\'(.*?)\'\).*', style_font[0])
             self.camp = self.ftn.get_gesources(ttf_file.group(3))
             # dd = i.css('.update span span::text').extract()  # 解析出来是框框 所以需要使用正则去匹配
             # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')  # 改变标准输出的默认编码
-            font_num = self.ftn.execute(reg.group(item+1), self.camp)
-            print(font_num)
+            nb_item['font_num'] = float(self.ftn.execute(reg.group(item + 1), self.camp))
+            nb_item['book_name'] = i.css('.book-mid-info h4 a::text').extract()[0]
+            nb_item['author_name'] = i.css('.book-mid-info .author .name::text').extract()[0]
+            nb_item['book_type'] = i.xpath('./div[2]/p[1]/a[2]/text()').get()
+            nb_item['classify_1'] = i.xpath('./div[2]/p[1]/a[2]/text()').get()
+            nb_item['classify_2'] = i.xpath('./div[2]/p[1]/a[3]/text()').get()
+            nb_item['book_status'] = i.xpath('./div[2]/p[1]/span/text()').get()
+            nb_item['intro'] = i.xpath('./div[2]/p[2]/text()').get()
+            yield nb_item

@@ -18,6 +18,17 @@ class NovelMenuItem(scrapy.Item):
     book_id = scrapy.Field()
 
 
+class NovelBookItem(scrapy.Item):
+    book_name = scrapy.Field()
+    book_type = scrapy.Field()
+    classify_1 = scrapy.Field()
+    classify_2 = scrapy.Field()
+    font_num = scrapy.Field()
+    book_status = scrapy.Field()
+    author_name = scrapy.Field()
+    intro = scrapy.Field()
+
+
 class IpItem(scrapy.Item):
     ip = scrapy.Field()
     port = scrapy.Field()
