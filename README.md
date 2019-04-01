@@ -1,2 +1,2 @@
 # novel-scrapy
-# pymysql scrapy fonttools
+# pymysql scrapy fonttools requests sqlalchemy gevent chardet mysqlclient

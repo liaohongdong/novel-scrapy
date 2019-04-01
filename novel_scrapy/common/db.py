@@ -21,7 +21,13 @@ class DBHelp():
             use_unicode=True,
         )
         dbpool = adbapi.ConnectionPool('pymysql', **dbargs)
+        sdb = pymysql.connect(
+            settings['MYSQL_HOST'],
+            settings['MYSQL_USER'],
+            settings['MYSQL_PASSWD'],
+            settings['MYSQL_DBNAME'])
         self.dbpool = dbpool
+        self.sdb = sdb
 
     def connect(self):
         return self.dbpool
