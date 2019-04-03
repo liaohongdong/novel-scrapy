@@ -22,3 +22,11 @@ class RandomProxy(object):
         proxy = get_proxy().get_ip()
         request.meta['proxy'] = 'http://%s' % proxy
         print("request.meta['proxy']:----------", request.meta['proxy'])
+
+    def process_response(self, request, response, spider):
+        if response.status != 200:
+            proxy = get_proxy().get_ip()
+            request.meta['proxy'] = 'http://%s' % proxy
+            return request
+        return response
+

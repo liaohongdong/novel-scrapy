@@ -31,3 +31,7 @@ a = getHtml()
 pp = pprint.PrettyPrinter(indent=4)
 ddd = pp.pformat(a.__dict__)
 print(ddd)
+
+dst = requests.get(
+    'http://www.qidian.com/finish?action=hidden&orderId=&style=1&pageSize=20&siteid=1&pubflag=0&hiddenField=2&page=2')
+print(dst)

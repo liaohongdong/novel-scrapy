@@ -27,6 +27,7 @@ class QdSpider(scrapy.Spider):
         wrap = response.css('.all-book-list ul li')
         re_txt = response.text
         reg = re.match(self.lines, re_txt, re.M | re.S)
+        next = response.css('.lbf-pagination-item-list li:last-child a::attr(href)').extract()[0]
         for item in range(len(wrap)):
             nb_item = NovelBookItem()
             i = wrap[item]
@@ -44,3 +45,6 @@ class QdSpider(scrapy.Spider):
             nb_item['book_status'] = i.xpath('./div[2]/p[1]/span/text()').get()
             nb_item['intro'] = i.xpath('./div[2]/p[2]/text()').get()
             yield nb_item
+
+        if next is not None:
+            yield scrapy.Request('http://' + next, callback=self.get_finish_info)
