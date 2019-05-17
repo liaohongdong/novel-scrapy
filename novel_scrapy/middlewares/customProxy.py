@@ -3,20 +3,29 @@
 from novel_scrapy.middlewares.resource import PROXIES
 from novel_scrapy.common.db import DBHelp
 import random
+import requests
+from novel_scrapy.common.get_proxy import get_proxy
 
 
 class RandomProxy(object):
-    def process_request(self, request, spider):
-        db = DBHelp()
+    @classmethod
+    def process_request(cls, request, spider):
+        # db = DBHelp()
         # proxy = random.choice(PROXIES)
-        # print(" ------>" + proxy)
         # cursor = db.sdb.cursor()
         # cursor.execute(
         #     'select * from scrapy_proxys where score = 10 ORDER BY RAND() LIMIT 1')
         # data = cursor.fetchone()
         # cursor.close()
         # proxy = str(data[1]) + ":" + str(data[2])
-        # print(" ------>" + proxy)
-        return
+        # print(proxy)
+        proxy = get_proxy().get_ip()
         request.meta['proxy'] = 'http://%s' % proxy
         print("request.meta['proxy']:----------", request.meta['proxy'])
+
+    def process_response(self, request, response, spider):
+        if response.status != 200:
+            proxy = get_proxy().get_ip()
+            request.meta['proxy'] = 'http://%s' % proxy
+            return request
+        return response
