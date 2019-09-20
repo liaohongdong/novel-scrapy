@@ -15,10 +15,11 @@ SPIDER_MODULES = ['novel_scrapy.spiders']
 NEWSPIDER_MODULE = 'novel_scrapy.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.54 Safari/536.5'
+# USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.54 Safari/536.5'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+# ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -53,8 +54,10 @@ ROBOTSTXT_OBEY = True
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     # 'novel_scrapy.middlewares.NovelScrapyDownloaderMiddleware': 543,
-    'novel_scrapy.middlewares.customProxy.RandomProxy': 300,  # 数字越小的优先处理
-    # 'novel_scrapy.middlewares.customUserAgent.RandomUserAgent': 543,
+    # 'novel_scrapy.middlewares.NovelScrapySpiderMiddleware': 543,
+    # 'novel_scrapy.middlewares.CustomUserAgent.CustomUserAgent': 299,
+    'novel_scrapy.middlewares.CustomProxy.CustomProxy': 300,  # 数字越小的优先处理
+
 }
 
 # Enable or disable extensions
