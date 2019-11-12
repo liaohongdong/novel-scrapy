@@ -1,12 +1,17 @@
 import requests
+
 # from test import testRun
+import pymysql
 
 if __name__ == '__main__':
-    asd = '103.242.13.69:8082'
+    # asd = '123.117.254.56:8060'
     # d = requests.get('http://www.baidu.com/', proxies={"http": "http://111.13.134.22:80"}, timeout=10)
-    # d = requests.get('http://www.baidu.com/', proxies={"http": asd}, timeout=5)
-    d = requests.get('http://httpbin.org/ip', proxies={"http": asd}, timeout=5)
-    print(d)
+    # d = requests.get('https://www.qidian.com/', proxies={"http": asd}, timeout=5)
+    # d = requests.get('http://httpbin.org/ip', proxies={"http": asd}, timeout=5)
+    # d = requests.get(
+    #     'https://www.qidian.com/finish?action=hidden&orderId=&style=1&pageSize=20&siteid=1&pubflag=0&hiddenField=2&page=3',
+    #     proxies={"http": asd}, timeout=5)
+    # print(d)
 
     # t = testRun()
     # requests.get('http://www.baidu.com/', proxies={"http": "http://112.91.224.33:9069"})
@@ -18,3 +23,7 @@ if __name__ == '__main__':
     # requests.get('http://www.baidu.com/', proxies={"http": "http://124.250.26.129:9011"})
     # requests.get('http://www.baidu.com/', proxies={"http": "http://39.137.77.66:8086"})
     # requests.get('http://www.baidu.com/', proxies={"http": "http://39.137.69.7:9036"})
+
+    a = "aaa\n '     /n "
+    d = pymysql.escape_string(a + ' " hha')
+    print(d)

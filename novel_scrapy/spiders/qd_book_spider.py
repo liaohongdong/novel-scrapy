@@ -2,6 +2,9 @@ import scrapy
 import re
 from novel_scrapy.common.font_num import FontToNum
 from novel_scrapy.items import NovelBookItem
+from novel_scrapy.common.LogHandler import Loghandler
+
+log = Loghandler('QdSpider')
 
 
 class QdSpider(scrapy.Spider):
@@ -28,6 +31,7 @@ class QdSpider(scrapy.Spider):
         re_txt = response.text
         reg = re.match(self.lines, re_txt, re.M | re.S)
         next = response.css('.lbf-pagination-item-list li:last-child a::attr(href)').extract()[0]
+        log.info("next------> {}".format(next))
         for item in range(len(wrap)):
             nb_item = NovelBookItem()
             i = wrap[item]
@@ -43,7 +47,7 @@ class QdSpider(scrapy.Spider):
             nb_item['classify_1'] = i.xpath('./div[2]/p[1]/a[2]/text()').get()
             nb_item['classify_2'] = i.xpath('./div[2]/p[1]/a[3]/text()').get()
             nb_item['book_status'] = i.xpath('./div[2]/p[1]/span/text()').get()
-            nb_item['intro'] = i.xpath('./div[2]/p[2]/text()').get()
+            nb_item['intro'] = i.xpath('./div[2]/p[2]/text()').get().strip().replace('\n', '')
             yield nb_item
 
         if next is not None:

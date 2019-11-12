@@ -28,16 +28,7 @@ class DBHelp():
             settings['MYSQL_DBNAME'])
         self.dbpool = dbpool
         self.sdb = sdb
+        self.escape = pymysql.escape_string
 
     def connect(self):
         return self.dbpool
-
-    def handle_error(self, failue, item, spider):
-        print('-------------------报错了-------------------')
-        print(failue)
-
-    # TODO 这个可以分离出去
-    def bqg_menu(self, conn, item, spider):
-        log.msg("````bqg_menu start```")
-        conn.execute('insert ignore into `scrapy_menu` (`book_type`) values (%s)', (item['book_type']))
-        log.msg("````bqg_menu end```")

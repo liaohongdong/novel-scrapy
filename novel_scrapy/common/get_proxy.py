@@ -35,15 +35,14 @@ class GetProxy(object):
                                         timeout=5
                                         )
                     if html and html.status_code == 200:
-                        print('html ===>', html, bytes.decode(proxy))
+                        print('38 html ===>', html, bytes.decode(proxy))
                         return bytes.decode(proxy)
                 except Exception as e:
-                    print('get_proxy: ===> ', e)
+                    print('41 get_proxy: ===> ', e)
                     retry_count -= 1
                     if retry_count == 0:
                         cls.delete_proxy(bytes.decode(proxy))
-                        time.sleep(1.5)
-                        cls.get_ip()
+                        return cls.get_ip()
             # if html and html.status_code == 200:
             #     return bytes.decode(proxy)
 

@@ -2,22 +2,27 @@
 
 from scrapy import signals
 
-from novel_scrapy.middlewares.resource import PROXIES
 from novel_scrapy.common.LogHandler import Loghandler
 from novel_scrapy.common.get_proxy import GetProxy
+import requests
 
 log = Loghandler('CustomProxy', file=False)
 
 
 class CustomProxy(object):
+    proxy_ip = ""
+
     @classmethod
     def process_request(cls, request, spider):
         log.debug('11112, Spider process_request: '.format(request))
         proxy = GetProxy().get_ip()
+        cls.proxy_ip = proxy
         if proxy != None:
             request.meta['proxy'] = 'http://%s' % proxy
-            log.debug("request.meta['proxy']:----------is not None")
-        log.debug("request.meta['proxy']:---------- {}".format(request.meta['proxy']))
+            # request.headers['Proxy-Authorization'] = b'Basic '
+            log.debug("request.meta['proxy']:---------- {}".format(request.meta['proxy']))
+        else:
+            log.debug("request.meta['proxy']:---------- 代理为空")
 
     def process_response(self, request, response, spider):
         spider.logger.info('1113 Spider process_response: {0}, {1}'.format(request, response))
@@ -29,6 +34,9 @@ class CustomProxy(object):
 
     def process_exception(self, request, exception, spider):
         spider.logger.info('1114 Spider process_exception: {0}, {1}'.format(request, exception))
+        spider.logger.info('delete process_exception: {0}, {1}'.format(request, exception))
+        print(request, "self.proxy_ip ===>", self.proxy_ip)
+        # requests.get("http://39.108.115.177:5000/delete/?proxy={}".format(proxy))
         # Called when a download handler or a process_request()
         # (from other downloader middleware) raises an exception.
 
