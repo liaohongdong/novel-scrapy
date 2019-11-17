@@ -74,7 +74,8 @@ ITEM_PIPELINES = {
     # 'novel_scrapy.pipelines.novel_scrapy_pipelines.NovelScrapyPipeline': 300,
     # 'novel_scrapy.pipelines.qd_book_pipelines.QdBookPipeline': 100,
     # 'novel_scrapy.pipelines.bqg_pipelines.BqgPipelines': 100,
-    'novel_scrapy.pipelines.bqg_book_status_pipelines.BqgBookStatusPipelines': 101,
+    # 'novel_scrapy.pipelines.bqg_book_status_pipelines.BqgBookStatusPipelines': 101,
+    'novel_scrapy.pipelines.bqg_book_chapter_whole_pipelines.BqgBookChapterWholePipelines': 102,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -112,5 +113,5 @@ RETRY_TIMES = 1
 MYSQL_HOST = '139.224.117.136'
 MYSQL_DBNAME = 'novel_scrapy'
 MYSQL_USER = 'root'
-MYSQL_PASSWD = '123456'
+MYSQL_PASSWD = 'qwertyuiopasdfghjklzxcvbnm'
 MYSQL_PORT = 3307

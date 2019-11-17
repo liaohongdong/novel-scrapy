@@ -22,10 +22,12 @@ class DBHelp():
         )
         dbpool = adbapi.ConnectionPool('pymysql', **dbargs)
         sdb = pymysql.connect(
-            settings['MYSQL_HOST'],
-            settings['MYSQL_USER'],
-            settings['MYSQL_PASSWD'],
-            settings['MYSQL_DBNAME'])
+            host=settings['MYSQL_HOST'],
+            user=settings['MYSQL_USER'],
+            passwd=settings['MYSQL_PASSWD'],
+            database=settings['MYSQL_DBNAME'],
+            port=settings['MYSQL_PORT']
+        )
         self.dbpool = dbpool
         self.sdb = sdb
         self.escape = pymysql.escape_string

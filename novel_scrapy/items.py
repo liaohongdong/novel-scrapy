@@ -64,3 +64,10 @@ class BqgBookStatusItem(scrapy.Item):
     book_status = scrapy.Field()
     last_time = scrapy.Field()
     last_chapter = scrapy.Field()
+
+
+class BqgBookChapterWhole(scrapy.Item):
+    id = scrapy.Field()
+    cid = scrapy.Field()
+    chapter_name = scrapy.Field()
+    chapter_url = scrapy.Field()
