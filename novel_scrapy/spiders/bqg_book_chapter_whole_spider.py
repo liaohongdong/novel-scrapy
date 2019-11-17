@@ -20,7 +20,7 @@ class bqgBookChapterWholeSpider(scrapy.Spider):
         res = self.executeSql("SELECT * FROM `novel_scrapy`.`scrapy_book_whole` LIMIT " + str(self.start_id) + ",1")
         if res[3]:
             self.initUrlId = self.getOriginUrl(res[3])
-            self.start_urls[0] = self.start_urls[0] + self.initUrlId + ".html"
+            self.start_urls[0] = "https://m.qu.la/booklist/" + self.initUrlId + ".html"
             self.start_id = int(self.start_id) + 1
 
     def executeSql(self, sql):
@@ -53,9 +53,10 @@ class bqgBookChapterWholeSpider(scrapy.Spider):
         try:
             next_res = self.executeSql(
                 "SELECT * FROM `novel_scrapy`.`scrapy_book_whole` LIMIT " + str(self.start_id) + ",1")
+            log.info("SELECT * FROM `novel_scrapy`.`scrapy_book_whole` LIMIT " + str(self.start_id) + ",1")
             if next_res[3]:
                 self.initUrlId = self.getOriginUrl(next_res[3])
-                self.start_urls[0] = self.start_urls[0] + self.initUrlId + ".html"
+                self.start_urls[0] = "https://m.qu.la/booklist/" + self.initUrlId + ".html"
                 self.start_id = int(self.start_id) + 1
                 yield scrapy.Request(self.start_urls[0], callback=self.parse, dont_filter=True)
         except Exception as e:
