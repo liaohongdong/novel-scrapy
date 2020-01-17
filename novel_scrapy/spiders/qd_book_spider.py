@@ -44,8 +44,8 @@ class QdSpider(scrapy.Spider):
             nb_item['book_name'] = i.css('.book-mid-info h4 a::text').extract()[0]
             nb_item['author_name'] = i.css('.book-mid-info .author .name::text').extract()[0]
             nb_item['book_type'] = i.xpath('./div[2]/p[1]/a[2]/text()').get()
-            nb_item['classify_1'] = i.xpath('./div[2]/p[1]/a[2]/text()').get()
-            nb_item['classify_2'] = i.xpath('./div[2]/p[1]/a[3]/text()').get()
+            nb_item['classify_one'] = i.xpath('./div[2]/p[1]/a[2]/text()').get()
+            nb_item['classify_two'] = i.xpath('./div[2]/p[1]/a[3]/text()').get()
             nb_item['book_status'] = i.xpath('./div[2]/p[1]/span/text()').get()
             nb_item['intro'] = i.xpath('./div[2]/p[2]/text()').get().strip().replace('\n', '')
             yield nb_item

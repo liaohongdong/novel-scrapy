@@ -20,12 +20,12 @@ class QdBookPipeline(object):
     def qd_book_name(self, conn, item, spider):
         log.msg("````qd_book_name start```")
         conn.execute('insert ignore into `scrapy_book` '
-                     '(`book_name`, `book_type`, `classify_1`, `classify_2`, `font_num`, `book_status`, `author_name`, `intro`)'
+                     '(`book_name`, `book_type`, `classify_one`, `classify_two`, `font_num`, `book_status`, `author_name`, `intro`)'
                      ' values (%s, %s, %s, %s, %s, %s, %s, %s)',
                      (item['book_name'],
                       item['book_type'],
-                      item['classify_1'],
-                      item['classify_2'],
+                      item['classify_one'],
+                      item['classify_two'],
                       item['font_num'],
                       item['book_status'],
                       item['author_name'],
